@@ -137,7 +137,7 @@
                             <div class="flex-1 border border-dashed border-gray-300 rounded-xl relative overflow-hidden bg-white shadow-sm" style="touch-action: none;">
                                 <canvas id="sigCanvasGlobal" class="absolute inset-0 w-full h-full cursor-crosshair"></canvas>
                                 <div id="sigPlaceholderGlobal" class="absolute inset-0 pointer-events-none flex flex-col items-center justify-center gap-2">
-                                    <!-- 【研发注意】底纹姓名需读取用户注册时填写的真实姓名。若后台由于重名问题在姓名后加了数字（如“张三丰1”），前端需过滤掉数字仅展示姓名本身 -->
+                                    <!-- 【研发注意】底纹姓名需读取【员工表】中的真实姓名（注：因注册表的姓名系统无校验，不可用）。若后台由于重名问题在姓名后加了数字（如“张三丰1”），前端需过滤掉数字仅展示姓名本身 -->
                                     <span class="text-[64px] font-extralight tracking-[0.35em] select-none" style="color: rgba(209,213,219,0.45); font-family: 'STKaiti', 'KaiTi', serif;">张三丰</span>
                                     <span class="text-xs text-gray-300 select-none tracking-wider">请在此处签写您的姓名</span>
                                 </div>
@@ -338,7 +338,7 @@
                     <ul class="list-decimal pl-4 space-y-1">
                         <li><strong>防误触/盲签：</strong>默认【同意并继续】按钮置灰，必须监听 <code>scroll</code> 触底事件后方可高亮解锁。</li>
                         <li><strong>唤起画板：</strong>点击解锁后的同意，划出手写签名区。</li>
-                        <li><strong>底纹姓名读取与脱敏：</strong><span class="text-red-600 font-bold">画板中的姓名底纹需读取用户注册时的姓名。若后端返回的姓名带有因重名追加的数字（如"张三丰1"），前端需利用正则过滤掉数字，仅显示汉字姓名本身。</span></li>
+                        <li><strong>底纹姓名读取与脱敏：</strong><span class="text-red-600 font-bold">画板中的姓名底纹需读取【员工表】的姓名（注：由于注册表填写的姓名系统没校验，所以不可用）。若后端返回的姓名带有因重名追加的数字（如"张三丰1"），前端需利用正则过滤掉数字，仅显示汉字姓名本身。</span></li>
                         <li><strong>签名校验测试：</strong>空白画布直接点提交，需Toast阻断提示“请先完成手写签名”。画线后点击“清空”，状态需重置为空白拦截状态。</li>
                         <li><strong>提交闭环：</strong>签名确认后，向后端提交 <code>Base64图片/流</code>。后端保存存根并修改状态 <code>is_signed=true</code>。前端收到成功回调后，销毁弹窗并解除底部页面的模糊遮罩。</li>
                         <li><strong>拒绝异常流：</strong>点击【暂不同意】出二次确认，执意拒绝则页面转为无权限空状态，彻底销毁/隐藏真实业务DOM。</li>
